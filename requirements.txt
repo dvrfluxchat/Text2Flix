@@ -1,0 +1,15 @@
+Flask
+Flask-CORS
+tqdm
+numpy
+librosa
+scipy
+sklearn
+pydub
+pandas
+matplotlib
+pickleshare
+jupyter
+seaborn
+tqdm
+g2p-en

@@ -1,17 +1,19 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/whatsapp/webhook', methods=['POST'])
-def whatsapp_webhook():
-    # Extract the incoming message data
+@app.route('/', methods=['GET'])
+def get_request():
+    return 'Hello, World!'
+
+@app.route('/', methods=['POST'])
+def post_request():
     data = request.get_json()
+    # Process the data as needed
+    # ...
 
-    # Process the incoming message data
-    # Here you can integrate with a WhatsApp API or service to handle the message
-
-    # Return a response
-    return 'Message received!', 200
+    response = {'message': 'Data received successfully'}
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(debug=True)

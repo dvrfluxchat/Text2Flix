@@ -1,0 +1,19 @@
+{
+    "scenes": [
+        {
+            "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-6gmMszQ8rma5IAOR47fs69Y1/user-52mFV71zrxQlGR7HrIXQuTr2/img-e6JS6rQYFnVGhyOBuLfkB9U6.png?st=2023-05-27T17%3A29%3A49Z&se=2023-05-27T19%3A29%3A49Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-26T22%3A19%3A43Z&ske=2023-05-27T22%3A19%3A43Z&sks=b&skv=2021-08-06&sig=8xUSU1vd9MoZzmkv23t64O2P27t6vvAw%2Bp8IKC3klm8%3D",
+            "speaker_name": "v2/en_speaker_9",
+            "scene_description": "Mickey Mouse was strolling down Main Street, USA, when he saw his friend Goofy. He waved to Goofy and shouted, 'HI GOOFY!' [laughs]"
+        },
+        {
+            "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-6gmMszQ8rma5IAOR47fs69Y1/user-52mFV71zrxQlGR7HrIXQuTr2/img-NcvBBH8FQ2fTuWYFSugm5486.png?st=2023-05-27T17%3A29%3A49Z&se=2023-05-27T19%3A29%3A49Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-27T12%3A11%3A26Z&ske=2023-05-28T12%3A11%3A26Z&sks=b&skv=2021-08-06&sig=CWdfA8B7au%2BmxIQsAvjh40C/MEfykQS3Kv24opkKM0I%3D",
+            "speaker_name": "v2/en_speaker_9",
+            "scene_description": "Mickey Mouse and Goofy sat on a bench, talking about their exciting day. Mickey Mouse said, 'I went to the park and rode on all the rides.' Goofy replied, 'Wow! That sounds like so much fun!' [laughs]"
+        },
+        {
+            "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-6gmMszQ8rma5IAOR47fs69Y1/user-52mFV71zrxQlGR7HrIXQuTr2/img-E5MF7d5jiB3DqggtZ6QRihEj.png?st=2023-05-27T17%3A29%3A49Z&se=2023-05-27T19%3A29%3A49Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-26T22%3A19%3A16Z&ske=2023-05-27T22%3A19%3A16Z&sks=b&skv=2021-08-06&sig=nGQ4/T0ZOP8B9I%2BMCLWb59w97pgZrTu%2B%2BiCMRXLtqkw%3D",
+            "speaker_name": "v2/en_speaker_9",
+            "scene_description": "Mickey Mouse and Goofy were enjoying their ice cream cones when Mickey Mouse suddenly got brain freeze. He rubbed his forehead and said, 'Ouch! That's cold!' [clears throat]"
+        }
+    ]
+}

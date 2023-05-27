@@ -65,8 +65,19 @@ def predict_bulk():
 def generate_audio_from_text(text, history_prompt, file_save_path="default"):
     sentences = nltk.sent_tokenize(text)
     pieces = []
+    joined_sentence = ""
     for sentence in sentences:
-        audio_array = generate_audio(sentence, history_prompt=history_prompt)
+        if len(joined_sentence) + len(sentence) < 200:
+            joined_sentence += sentence
+            continue
+        else:
+            joined_sentence += sentence
+            audio_array = generate_audio(joined_sentence, history_prompt=history_prompt)
+            joined_sentence = ""           
+        
+        pieces += [audio_array]
+    if joined_sentence != '':
+        audio_array = generate_audio(joined_sentence, history_prompt=history_prompt)
         pieces += [audio_array]
     audio_array = np.concatenate(pieces)
     file_name = f"{file_save_path}.wav"

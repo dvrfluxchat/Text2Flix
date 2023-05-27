@@ -1,0 +1,24 @@
+{
+    "scenes": [
+        {
+            "image_prompt": "A swarm of colorful BUTTERFLIES fluttered around the garden, landing on flowers and drinking nectar.",
+            "story_text": "Once upon a time, there was a beautiful garden full of colorful BUTTERFLIES. They flew gracefully from flower to flower, their wings shimmering in the sunlight."
+        },
+        {
+            "image_prompt": "A tiny butterfly emerged from its chrysalis, spreading its wings for the first time.",
+            "story_text": "One day, a small BUTTERFLY emerged from its chrysalis, stretching its wings and taking its first flight. It was a sight to behold!"
+        },
+        {
+            "image_prompt": "A group of butterflies gathered around a puddle, drinking water and splashing each other.",
+            "story_text": "As the BUTTERFLIES flew around the garden, they stumbled upon a puddle. They gathered around it, drinking water and playing with each other, [laughs] enjoying their time together."
+        },
+        {
+            "image_prompt": "A butterfly landed on a little girl's hand, tickling her with its delicate wings.",
+            "story_text": "As a little girl sat in the garden, a BUTTERFLY landed on her hand, tickling her with its delicate wings. She was thrilled to have made a new friend!"
+        },
+        {
+            "image_prompt": "A butterfly perched on a flower, sipping nectar as it basked in the warm sun.",
+            "story_text": "As the sun began to set, a BUTTERFLY perched on a flower, sipping nectar and basking in the warm rays. It was a peaceful end to a beautiful day in the garden."
+        }
+    ]
+}

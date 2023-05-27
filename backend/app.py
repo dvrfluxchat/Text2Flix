@@ -6,12 +6,13 @@ app = Flask(__name__)
 def get_request():
     return 'Hello, World!'
 
-@app.route('/', methods=['POST'])
+
+@app.route('/whatsapp/webhook', methods=['POST'])
 def post_request():
     data = request.get_json()
     # Process the data as needed
     # ...
-
+    print(data)
     response = {'message': 'Data received successfully'}
     return jsonify(response)
 

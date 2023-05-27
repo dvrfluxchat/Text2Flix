@@ -10,6 +10,7 @@ import os
 app = Flask(__name__)
 service = UseLLM(service_url="https://usellm.org/api/llm")
 received_messages = {}
+access_token = os.getenv('TOKEN_KEY')
 
 sample_url = "https://firebasestorage.googleapis.com/v0/b/fluxchathq.appspot.com/o/business%2FuGB2TqCXmPm80liNJWj1%2Fincoming%2Ff06b0d591f9e5898e9ec92e775818213.mp4?generation=1685074476278323&alt=media&token=2e24bb91-b2b4-41d0-a8e2-259d46c2dde9"
 
@@ -30,7 +31,7 @@ def send_video(video_url,caption):
     })
     headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer EAAEMW3is2WIBAPoWb0ak1vwP0Bmc2Gvyw7kX5TUbs81j1OsZC38iQZAoI0aHMMCoN3HH8BN7obmfpzQaMw1c1cSZBLtVvflLSrhKnUZAsJv1v2qNffGSLQXiYyuLi51mQoiANjQEjJjdIp2ulKcK9sCjV7f6qTgu9k3Bv16UIQhssmAfn6LGntKG4tMQuKfnEdeB7VkTFAZDZD'
+    'Authorization': f'Bearer {access_token}'
     }
 
     print(payload)

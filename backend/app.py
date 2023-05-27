@@ -30,7 +30,7 @@ def send_video(video_url,caption):
     })
     headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer EAAEMW3is2WIBACVQdRRY31V7ZB5pzIiAEYa4iQySbT1zk8ERvck9Y3erZAcLbIMZBqFNSTFf4Av6MtGawVcSbqMH0GP7QbwXKyqfGj6DtjzBks8VSkdQQmIhfz6J9Ke1lraCpMvmIYZCNrHC9aKjCsVTsidIiSIwZAv7vIi2NPFxJp1cWJQHWehKCs4pcGoAZCgx4Xb2n78QZDZD'
+    'Authorization': 'Bearer EAAEMW3is2WIBAPoWb0ak1vwP0Bmc2Gvyw7kX5TUbs81j1OsZC38iQZAoI0aHMMCoN3HH8BN7obmfpzQaMw1c1cSZBLtVvflLSrhKnUZAsJv1v2qNffGSLQXiYyuLi51mQoiANjQEjJjdIp2ulKcK9sCjV7f6qTgu9k3Bv16UIQhssmAfn6LGntKG4tMQuKfnEdeB7VkTFAZDZD'
     }
 
     print(payload)

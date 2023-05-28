@@ -164,7 +164,7 @@ def run_llm(phone,text):
         response = requests.post(api_url, headers=headers, json=finalPayload)
         # print(response.content," ############################# karthik server response")
         video_url = save_video_from_response(response)
-        send_video(phone,video_url,"your generated story for prompt : "+text+" is")
+        send_video(phone,video_url,"your generated story for prompt : "+text)
     except Exception as error:
         print("Error:", error)
     
@@ -243,7 +243,7 @@ def post_request():
     server_url_base = get_base_url()
     sample_video_url = server_url_base+"/static/sample_generated.mp4"
     send_text_message(phone,"Please wait...")
-    send_video(phone,sample_video_url,"Here is a short story about sunrise for your kids")
+    send_video(phone,sample_video_url,"You can watch this previously generated story video about sunrise until we work on your story. These can take upto 3-4 minutes")
     run_llm(phone,text_body)  # Call run_llm function with text_body
     # sendvideo(text_body)
     # video_url = save_video()

@@ -31,7 +31,7 @@ def save_processed_message_ids(message_ids):
     with open('processed_message_ids.json', 'w') as file:
         json.dump(message_ids, file)
 
-def send_video(video_url,caption):
+def send_video(phone,video_url,caption):
     print("SENDING VIDEO MESSAGE ################ : ",video_url,caption)
 
     url = "https://graph.facebook.com/v16.0/100233876104846/messages"
@@ -39,7 +39,7 @@ def send_video(video_url,caption):
     payload = json.dumps({
     "messaging_product": "whatsapp",
     "recipient_type": "individual",
-    "to": "918328414331",
+    "to": f"{phone}",
     "type": "video",
     "video": {
         # "link": "https://ec83-125-23-34-124.ngrok-free.app/static/video_1685228995_3jigq7.mp4",
@@ -58,7 +58,7 @@ def send_video(video_url,caption):
     print("completed sending video ",response.ok)
 
 
-def run_llm(text):
+def run_llm(phone,text):
         # Prepare the conversation
     messages = [
         Message(role="system", content=f"""Generate a short story about {text} for children with emphasis on words with CAPS . 
@@ -107,20 +107,21 @@ def run_llm(text):
     print("Pinging karthik's laptop with payload ",finalPayload)
 
     try:
-        json_data = json.dumps(finalPayload)
+        # json_data = json.dumps(finalPayload)
         api_url = "https://b79c-49-207-201-12.ngrok-free.app/predict-script"
         headers = {
             "Content-Type": "application/json"
         }
-        response = requests.post(api_url, headers=headers, json=json_data)
+        response = requests.post(api_url, headers=headers, json=finalPayload)
+        # print(response.content," ############################# karthik server response")
         video_url = save_video_from_response(response)
-        send_video(video_url,"your generated story for prompt : "+text+" is")
+        send_video(phone,video_url,"your generated story for prompt : "+text+" is")
     except Exception as error:
         print("Error:", error)
     
     # Print the assistant's response
     print("We are done sending the whatsapp back to the user")
-    send_text_message('Hope you enjoyed your video for prompt '+text)
+    send_text_message(phone,'Hope you enjoyed your video for prompt '+text)
 
 def generate_image(scene):
     prompt = scene['image_prompt']
@@ -183,6 +184,8 @@ def post_request():
     # ...
     print("Data being processed for the first time ************************", data)
     text_body = data['entry'][0]['changes'][0]['value']['messages'][0]['text']['body']
+    whatsapp_id = data['entry'][0]['changes'][0]['value']['contacts'][0]['wa_id']
+    phone = "+"+whatsapp_id
     # Store message ID in the map
     received_messages[message_id] = True
 
@@ -190,9 +193,9 @@ def post_request():
 
     server_url_base = get_base_url()
     sample_video_url = server_url_base+"/static/sample_generated.mp4"
-    send_text_message("Please wait...")
-    send_video(sample_video_url,"We will take some time to generate video for your prompt, till then here is one of our previously generated videos for the prompt 'rising sun'")
-    run_llm(text_body)  # Call run_llm function with text_body
+    send_text_message(phone,"Please wait...")
+    send_video(phone,sample_video_url,"We will take some time to generate video for your prompt, till then here is one of our previously generated videos for the prompt 'rising sun'")
+    run_llm(phone,text_body)  # Call run_llm function with text_body
     # sendvideo(text_body)
     # video_url = save_video()
     response = {'message': 'Data received successfully'}
@@ -279,7 +282,7 @@ def generate_unique_file_name():
 
 
 
-def send_text_message(text):
+def send_text_message(phone,text):
     print("SENDING TEXT MESSAGE ################ : ",text)
     url = 'https://graph.facebook.com/v16.0/100233876104846/messages'
     headers = {
@@ -289,7 +292,7 @@ def send_text_message(text):
     data = {
         "messaging_product": "whatsapp",    
         "recipient_type": "individual",
-        "to": "+918328414331",
+        "to": f"{phone}",
         "type": "text",
         "text": {
             "preview_url": True,

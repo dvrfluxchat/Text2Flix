@@ -22,6 +22,8 @@ sample_url = "https://firebasestorage.googleapis.com/v0/b/fluxchathq.appspot.com
 
 
 def send_video(video_url,caption):
+    print("SENDING VIDEO MESSAGE ################ : ",video_url,caption)
+
     url = "https://graph.facebook.com/v16.0/100233876104846/messages"
 
     payload = json.dumps({
@@ -173,9 +175,6 @@ def post_request():
     response = {'message': 'Data received successfully'}
     return jsonify(response)
 
-
-
-
 @app.route('/save_video', methods=['GET'])
 def save_video():
     # Call the external API and get the video response
@@ -258,6 +257,7 @@ def generate_unique_file_name():
 
 
 def send_text_message(text):
+    print("SENDING TEXT MESSAGE ################ : ",text)
     url = 'https://graph.facebook.com/v16.0/100233876104846/messages'
     headers = {
         'Authorization': f'Bearer {access_token}',

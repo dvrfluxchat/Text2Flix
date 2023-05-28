@@ -75,19 +75,21 @@ def run_llm(text):
     # generate images for each of the prompt
     scenes_and_prompts_dict = json.loads(scenes_and_prompts.content)
     scenes = scenes_and_prompts_dict['scenes']
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-    # Submit tasks for each scene
-        futures = [executor.submit(generate_image, scene) for scene in scenes]
+    # with concurrent.futures.ThreadPoolExecutor() as executor:
+    # # Submit tasks for each scene
+    #     futures = [executor.submit(generate_image, scene) for scene in scenes]
 
-    # Retrieve the results as they become available
-    for future in concurrent.futures.as_completed(futures):
-        try:
-            scene_image = future.result()
-            scenes_and_images.append(scene_image)
-        except Exception as e:
-            print(f"An error occurred: {e}")
+    # # Retrieve the results as they become available
+    # for future in concurrent.futures.as_completed(futures):
+    #     try:
+    #         scene_image = future.result()
+    #         scenes_and_images.append(scene_image)
+    #     except Exception as e:
+    #         print(f"An error occurred: {e}")
+    for scene in scenes:
+        scene_image = generate_image(scene)
+        scenes_and_images.append(scene_image)
 
-    
     finalPayload = {
         "scenes":scenes_and_images
     }

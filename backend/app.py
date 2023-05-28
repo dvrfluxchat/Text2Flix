@@ -45,7 +45,7 @@ def send_video(video_url,caption):
     # print(access_token," ACCESSSS************************",video_url)
 
     response = requests.request("POST", url, headers=headers, data=payload)
-    print(response.text)
+    print("completed sending video ",response.ok)
 
 
 def run_llm(text):
@@ -158,7 +158,7 @@ def post_request():
 
     # Process the data as needed
     # ...
-    print(data)
+    print("Data being processed for the first time ************************", data)
     text_body = data['entry'][0]['changes'][0]['value']['messages'][0]['text']['body']
     # Store message ID in the map
     received_messages[message_id] = True

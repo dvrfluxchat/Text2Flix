@@ -20,6 +20,16 @@ dev_environment = os.getenv('DEV_ENV')
 
 sample_url = "https://firebasestorage.googleapis.com/v0/b/fluxchathq.appspot.com/o/business%2FuGB2TqCXmPm80liNJWj1%2Fincoming%2Ff06b0d591f9e5898e9ec92e775818213.mp4?generation=1685074476278323&alt=media&token=2e24bb91-b2b4-41d0-a8e2-259d46c2dde9"
 
+def load_processed_message_ids():
+    try:
+        with open('processed_message_ids.json', 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+def save_processed_message_ids(message_ids):
+    with open('processed_message_ids.json', 'w') as file:
+        json.dump(message_ids, file)
 
 def send_video(video_url,caption):
     print("SENDING VIDEO MESSAGE ################ : ",video_url,caption)
@@ -153,10 +163,21 @@ def post_request():
 
     message_id = data['entry'][0]['changes'][0]['value']['messages'][0]['id']
 
-    if message_id in received_messages:
-        print("this is already present")
+
+    # if message_id in received_messages:
+    #     print("this is already present")
+    #     response = {'message': 'Message already received'}
+    #     return jsonify(response)
+
+    processed_message_ids = load_processed_message_ids()
+    if message_id in processed_message_ids:
+        print("this is already present ",message_id)
         response = {'message': 'Message already received'}
         return jsonify(response)
+
+    # Add the message ID to the list of processed message IDs
+    processed_message_ids.append(message_id)
+    save_processed_message_ids(processed_message_ids)
 
     # Process the data as needed
     # ...

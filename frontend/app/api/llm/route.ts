@@ -20,9 +20,9 @@ const llmService = createLLMService({
 
 llmService.registerTemplate({
     id: "story-generator",
-    max_tokens: 1000,
+    max_tokens: 2048,
     model: "gpt-3.5-turbo",
-    temperature: 0.7,
+    temperature: 1,
   });
 
 export async function POST(request: Request) {

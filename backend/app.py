@@ -14,6 +14,9 @@ import concurrent.futures
 
 app = Flask(__name__)
 service = UseLLM(service_url="https://usellm.org/api/llm")
+# service = UseLLM(service_url="https://ramanafluxchathq.loca.lt/api/llm")
+
+# https://ramanafluxchathq.loca.lt
 received_messages = {}
 access_token = os.getenv('TOKEN_KEY')
 dev_environment = os.getenv('DEV_ENV')
@@ -61,29 +64,75 @@ def send_video(phone,video_url,caption):
 def run_llm(phone,text):
         # Prepare the conversation
     messages = [
-        Message(role="system", content=f"""Generate a short story about {text} for children with emphasis on words with CAPS . 
-        Use [laughs] for laughter,  ... for pauses, and [clears throat] for effect. 
-        Break it down into scenes, and give one image prompt per scene for Dall-E 2. 
-        The Dall-E prompt should describe the scene and also add these to the prompt "digital art,photorealistic style". 
-        Do not use ambiguous character names like rose and lily. 
-        Please give the output in JSON format. 
-        The JSON should be like this {{"scenes":[{{
-            "image_prompt": "dalle image prompt",
-            "story_text": "scene text"
-        }}]}}
-        Make sure the story_text does not exceed 3 sentences."""),
+        Message(role="system", content=f"""Story title : {text}
+            Generate a short story with the title given above. This short story is for narrating. 
+            The target audience and language of the story will be mentioned in the story else assume children and english.
+            If hindi is mentioned then the text should be in हिंदी.
+            
+            Break the story into scenes such that each scene has at most 3 sentences. 
+            Generate a dall-E prompt for each scene and include two keywords from below.
+            Digital art,
+            Photorealistic style,
+            Anime movie,
+            Synth wave,
+            Van gogh,
+            Picasso
+
+            Please give output in JSON format. The JSON should be like this
+            {{"scenes":[{{
+                        "image_prompt": "dall-e image prompt",
+                        "story_text": "scene dialogue",
+                        "audio_model” :"choose from option below"
+            }}]}}
+            Audio_model can take four values based on language of the text. 
+            If language of text is english then only choose english male or female. 
+            English Male : v2/en_speaker_6
+            English Female : v2/en_speaker_9
+            Hindi Male : v2/hi_speaker_8
+            Hindi Female : v2/hi_speaker_9 
+            """
+            ),
     ]
 
 
-    options = Options(messages=messages)
+    options = Options(messages=messages,template="story-generator")
 
     # Interact with the service
     scenes_and_prompts = service.chat(options)
     print("*************",scenes_and_prompts.content)
 
+  
     scenes_and_images = []
     # generate images for each of the prompt
     scenes_and_prompts_dict = json.loads(scenes_and_prompts.content)
+
+    # scenes_and_prompts_dict = {
+    #     "story_title": "Shiva - A Short Story in Hindi for Children", 
+    #     "scenes": [
+    #             {
+    #                 "image_prompt": "Generate a digital art of Shiva meditating on Mount Kailash with a photorealistic style and snowy mountain background.", 
+    #                 "story_text": "एक समय की बात है जब भगवान शिव दुनिया को अपनी ध्यान विचार में खो गए थे। उन्होंने माउंट कैलाश पर अपना आश्रम बनाया था जहाँ वे साधना करते रहते थे।", 
+    #                 "audio_model": "hi_speaker_9"
+    #             }, 
+    #             {
+    #                 "image_prompt": "Generate a pixel art of Shiva saving the world from disaster with the background of a Picasso painting.", 
+    #                 "story_text": "एक दिन जब विश्व को आपदा का सामना करना पड़ा तब भगवान शिव ने लोगों की मदद करने की सोची। वे नागेश्त मंदिर से 5000 मील दूर एक रूसी दूतावास में जा बैठे थे और मेहमानों को इस संकट से निकालने के लिए प्रयास कर रहे थे।", 
+    #                 "audio_model": "hi_speaker_8"
+    #             }, 
+    #             {
+    #                 "image_prompt": "Generate an anime movie style artwork of Shiva dancing with Nandi.", 
+    #                 "story_text": "शिव नाट्य और तांडव के प्रभावशाली नर्तक भी थे। उन्होंने नंदी के साथ नृत्य करने का भी आनंद लिया जो जानवरों में स्वर्गीय होने के कारण धार्मिक एवं सामाजिक संस्कार में महत्वपूर्ण माने जाते हैं।", 
+    #                 "audio_model": "hi_speaker_9"
+    #             },
+    #             {
+    #                 "image_prompt": "Generate a photorealistic style digital art of Shiva riding on Nandi with the background of a Synth wave sky.", 
+    #                 "story_text": "नंदी को अपना वाहन बनाकर शिव बर्फ के शिखरों पर जाना लोगों के लिए एक पवित्र शाखा बन गए थे। उनके पास एक खास विशेषता थी कि वे वहां तक पहुंच सकते थे जहां कोई कोई नहीं जा सकता था।", 
+    #                 "audio_model": "hi_speaker_8"
+    #             }
+    #         ]
+    #     }
+    
+
     scenes = scenes_and_prompts_dict['scenes']
     with concurrent.futures.ThreadPoolExecutor() as executor:
     # Submit tasks for each scene
@@ -131,7 +180,7 @@ def generate_image(scene):
     image_url = prompt_response.images[0]
     scene_image = {
         'image_url': image_url,
-        'speaker_name': 'v2/en_speaker_9',
+        'speaker_name': scene['audio_model'],# 'v2/en_speaker_9',
         'scene_description': scene['story_text']
     }
     return scene_image
@@ -194,7 +243,7 @@ def post_request():
     server_url_base = get_base_url()
     sample_video_url = server_url_base+"/static/sample_generated.mp4"
     send_text_message(phone,"Please wait...")
-    send_video(phone,sample_video_url,"We will take some time to generate video for your prompt, till then here is one of our previously generated videos for the prompt 'rising sun'")
+    send_video(phone,sample_video_url,"Here is a short story about sunrise for your kids")
     run_llm(phone,text_body)  # Call run_llm function with text_body
     # sendvideo(text_body)
     # video_url = save_video()

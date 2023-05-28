@@ -275,7 +275,7 @@ def send_text_message(text):
     }
 
     response = requests.post(url, headers=headers, json=data)
-    print(response.text)
+    print("Text message sent ",text,response.ok)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0',port=5001, debug=True)

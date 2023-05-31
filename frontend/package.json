@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@remotion/cli": "^3.3.97",
+    "@remotion/eslint-plugin": "^3.3.97",
+    "@remotion/player": "^3.3.97",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
@@ -20,8 +23,12 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
+    "remotion": "^3.3.97",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",
     "usellm": "^0.7.0"
+  },
+  "devDependencies": {
+    "@remotion/tailwind": "^3.3.97"
   }
 }

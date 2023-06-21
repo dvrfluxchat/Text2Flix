@@ -1,24 +1,29 @@
-'use client';
-import { Img } from 'remotion';
+"use client";
+import { AbsoluteFill, Img } from "remotion";
 
 interface ImageStackProps {
-  imageUrls: string[];
+  bg: string;
+  fg: string;
 }
 
-const ImageStack: React.FC<ImageStackProps> = ({ imageUrls }) => {
+const ImageStack: React.FC<ImageStackProps> = ({ bg, fg }) => {
+  const zoomlevel = 100;
   return (
-    <div style={{ position: 'relative' }}>
-      {imageUrls.map((url, index) => (
-        <Img
-          key={index}
-          src={url}
-          alt={`Image ${index + 1}`}
-          //   width={1280}
-          //   height={720}
-          className="absolute inset-0"
-        />
-      ))}
-    </div>
+    <AbsoluteFill>
+      <Img
+        src={bg}
+        alt={`Image background`}
+        className={`absolute inset-0 w-[${zoomlevel}%] h-[${zoomlevel}%] object-cover`}
+      />
+      <Img
+        src={fg}
+        alt={`Image Foreground`}
+        width={720}
+        height={1280}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <p className="absolute text-9xl text-yellow-400 font-bold">test</p>
+    </AbsoluteFill>
   );
 };
 

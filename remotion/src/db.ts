@@ -1,4 +1,4 @@
-export const base_url = 'https://2c72-49-207-209-124.ngrok-free.app';
+export const base_url = 'https://a9ff-49-207-201-28.ngrok-free.app/';
 export const movie = {
 	id: 11,
 	scenes: [

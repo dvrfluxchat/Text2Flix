@@ -13,3 +13,7 @@ jupyter
 seaborn
 tqdm
 g2p-en
+flask_sqlalchemy
+psycopg2-binary
+flask-migrate
+rembg

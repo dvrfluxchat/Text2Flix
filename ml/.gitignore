@@ -1,3 +1,4 @@
 images/
 audio/
 *.mp4
+__pycache__/

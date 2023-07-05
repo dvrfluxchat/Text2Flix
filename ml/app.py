@@ -1,6 +1,7 @@
 from flask import Flask, request, send_file, send_from_directory
 from flask_cors import CORS
 import pickle
+import json
 
 
 
@@ -170,7 +171,8 @@ def create_movie():
             'background_image_url': scene.background_image_url,
             'audio_url': scene.audio_url,
             'duration': scene.duration,
-            'created_at': scene.created_at.isoformat()
+            'created_at': scene.created_at.isoformat(),
+            'audio_timestamp': json.loads(scene.audio_timestamps)
         })
 
     return jsonify({
@@ -200,7 +202,8 @@ def get_movie(movie_id):
             'background_image_url': scene.background_image_url,
             'audio_url': scene.audio_url,
             'duration': scene.duration,
-            'created_at': scene.created_at.isoformat()
+            'created_at': scene.created_at.isoformat(),
+            'audio_timestamp': json.loads(scene.audio_timestamps)
         })
 
     return jsonify({

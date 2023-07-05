@@ -16,6 +16,7 @@ class Scene(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), nullable=False)
     scene_description = db.Column(db.Text, nullable=False)
+    audio_timestamps = db.Column(db.Text, nullable=True)
     speaker_name = db.Column(db.String(256), nullable=False)
     foreground_image_prompt = db.Column(db.Text, nullable=False)
     background_image_prompt = db.Column(db.Text, nullable=False)

@@ -105,7 +105,7 @@ def generate_scene_images_and_audio(content, movie_obj, db):
 
         # generate timestamp with audio 
         audioTimeStamp = getAudioTranscriptionWithTimestamp(file_name)
-
+        scene.audio_timestamps = audioTimeStamp
         duration = librosa.get_duration(path=file_name)
         scene.duration = duration
         stitch_data.append((foreground_image_path, file_name, duration, scene_description, audioTimeStamp))

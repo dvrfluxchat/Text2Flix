@@ -16,6 +16,17 @@ import moviepy.editor as mp
 from moviepy.editor import ImageClip, concatenate_videoclips, CompositeVideoClip, TextClip
 from moviepy.audio.io.AudioFileClip import AudioFileClip
 
+import whisper_timestamped as whisper
+import json
+
+
+# function call to return the audio transcription
+def getAudioTranscriptionWithTimestamp(audio_file):
+    audio = whisper.load_audio(audio_file)
+    model = whisper.load_model("tiny", device="cpu")
+    result = whisper.transcribe(model, audio, language="en")
+    return  json.dumps(result, indent = 2, ensure_ascii = False)
+
 DEFAULT_WEBUI_IP = "http://127.0.0.1:7860"
 
 def generate_img_using_sdapi(
@@ -91,9 +102,13 @@ def generate_scene_images_and_audio(content, movie_obj, db):
         history_prompt = scene.speaker_name
         file_name = generate_audio_from_text(scene_description, history_prompt=history_prompt, file_save_path="audio/"+str(scene.id))
         scene.audio_url = file_name
+
+        # generate timestamp with audio 
+        audioTimeStamp = getAudioTranscriptionWithTimestamp(file_name)
+
         duration = librosa.get_duration(path=file_name)
         scene.duration = duration
-        stitch_data.append((foreground_image_path, file_name, duration, scene_description))
+        stitch_data.append((foreground_image_path, file_name, duration, scene_description, audioTimeStamp))
     db.session.commit()
     return stitch_data
 

@@ -13,7 +13,9 @@ jupyter
 seaborn
 tqdm
 g2p-en
-flask_sqlalchemy
-psycopg2-binary
-flask-migrate
-rembg
+git+https://github.com/linto-ai/whisper-timestamped
+onnxruntime
+torchaudio
+matplotlib
+transformers
+openai-whisper==20230124
